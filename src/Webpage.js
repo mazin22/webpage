@@ -33,45 +33,76 @@ import glogo from './images/g_logo.png'
 import fblogo from './images/fb_logo.png'
 import float from './images/float.png'
 import abstract from './images/abstract.png'
+
+
 const Webpage = () => {
-    const [follow_groups, setFollow_groups] = useState([[rec4, 'Leisure', false], [rec5, 'Activism', false], [rec6, 'MBA', false], [rec7, 'Philosophy', false]])
+    // State variables
+    const [follow_groups, setFollow_groups] = useState([[
+        rec4, 'Leisure', false],
+        [rec5, 'Activism', false], 
+        [rec6, 'MBA', false], 
+        [rec7, 'Philosophy', false]
+    ])
     const [location_edit_enabled, setLocation_edit_enabled] = useState(false)
     const [location_update, setLocation_update] = useState('Noida, India')
     const [user_signed_in, setUser_signed_in] = useState(false)
+
+    // Function to update followed groups
     const Updating_follow_grp = (clicked_group) => {
         follow_groups.map((group, index) => {(group[1] === clicked_group) && (follow_groups[index][2] = !group[2])})
         setFollow_groups([...follow_groups])
     }
+
+    // Media queries
     const breaking_point_desktop = useMediaQuery({query: '(min-width: 790px)'})
     const breaking_point_mobile = useMediaQuery({query: '(min-width: 400px)'})
+
+ 
     return (
         <div>
-            {breaking_point_desktop && <div className='topbar'>
-                <h5 magin className='logo'><span style={{color:'#27A365'}}>ATG.</span>W<span><img style={{marginBottom: '5px'}} alt='O' src={atglogo}/></span>RLD</h5>
-                <div style={{width: '360px', paddingTop: '15px', paddingBottom: '15px'}} class="input-group flex-nowrap">
-                    <span style={{borderBottomLeftRadius: '21px', borderTopLeftRadius: '21px', backgroundColor: '#F2F2F2', border: 'none'}} class="input-group-text" id="addon-wrapping"><img alt='search' src={searchicon}/></span>
-                    <input style={{fontSize: '13px', borderTopRightRadius: '21px', borderBottomRightRadius: '21px', backgroundColor: '#F2F2F2', border: 'none'}} type="text" class="form-control" placeholder="Search for your favourite groups in ATG" aria-describedby="addon-wrapping" />
-                </div>
-                <div style={{marginRight: '3%', width: '200px', paddingTop: '15px', paddingBottom: '15px'}} class="btn-group">
-                {user_signed_in ? <>
-                <button class="btn btn-sm" type="button" style={{textAlign: 'right'}}>
-                <div style={{display: 'flex'}}>
-                    <img style={{marginTop: '-4px', width: '40px', height: '40px'}} src={u4} alt='profile pic'/>&nbsp;&nbsp;<p style={{marginTop: '5px'}}>Siddharth Goyal</p>
-                </div>
-                </button>
-                <button disabled type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                </> : <>
-                <button data-bs-toggle="modal" data-bs-target="#createaccountmodal" class="btn btn-sm" type="button" style={{textAlign: 'right'}}>
-                    Create account.<span style={{color: 'blue'}}> It's free!</span>
-                </button>
-                <button disabled type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                </>}
-                </div>
-            </div>}
+            {breaking_point_desktop && (
+    <div className='topbar'>
+        {/* Logo */}
+        <h5 magin className='logo'>
+            <span style={{color:'#27A365'}}>ATG.</span>W<span>
+                <img style={{marginBottom: '5px'}} alt='O' src={atglogo}/>
+            </span>RLD
+        </h5>
+        {/* Search bar */}
+        <div style={{width: '360px', paddingTop: '15px', paddingBottom: '15px'}} class="input-group flex-nowrap">
+            <span style={{borderBottomLeftRadius: '21px', borderTopLeftRadius: '21px', backgroundColor: '#F2F2F2', border: 'none'}} class="input-group-text" id="addon-wrapping">
+                <img alt='search' src={searchicon}/>
+            </span>
+            <input style={{fontSize: '13px', borderTopRightRadius: '21px', borderBottomRightRadius: '21px', backgroundColor: '#F2F2F2', border: 'none'}} type="text" class="form-control" placeholder="Search for your favourite groups in ATG" aria-describedby="addon-wrapping" />
+        </div>
+        {/* User profile or create account */}
+        <div style={{marginRight: '3%', width: '200px', paddingTop: '15px', paddingBottom: '15px'}} class="btn-group">
+            {user_signed_in ? (
+                <>
+                    <button class="btn btn-sm" type="button" style={{textAlign: 'right'}}>
+                        <div style={{display: 'flex'}}>
+                            <img style={{marginTop: '-4px', width: '40px', height: '40px'}} src={u4} alt='profile pic'/>&nbsp;&nbsp;<p style={{marginTop: '5px'}}>Siddharth Goyal</p>
+                        </div>
+                    </button>
+                    <button disabled type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                </>
+            ) : (
+                <>
+                    <button data-bs-toggle="modal" data-bs-target="#createaccountmodal" class="btn btn-sm" type="button" style={{textAlign: 'right'}}>
+                        Create account.<span style={{color: 'blue'}}> It's free!</span>
+                    </button>
+                    <button disabled type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                </>
+            )}
+        </div>
+    </div>
+)}
+
+
             <div style={{backgroundColor: 'black'}}>
                 <img alt='banner' src={banner} style={{width: '100%', height: (breaking_point_desktop ? '440px' : (breaking_point_mobile ? '300px' : '200px')), marginTop: (breaking_point_desktop ? '72px' : ''), opacity: '0.5'}}/>
                 <h2 className='celabel' style={{fontSize: (breaking_point_mobile ? '' : '18px'), fontWeight: '700', color: 'white', position: 'absolute', marginTop: (breaking_point_desktop ? '-150px' : (breaking_point_mobile ? '-100px' : '-70px'))}}>Computer Engineering</h2>
@@ -82,82 +113,75 @@ const Webpage = () => {
                 <button style={{position: 'absolute', borderColor: 'white', color: 'white', borderRadius: '4px', marginTop: (breaking_point_mobile ? '-298px' : '-205px'), right: '0', marginRight: '3.75%'}}  data-bs-toggle="offcanvas" data-bs-target="#createaccountcanvas" aria-controls="offcanvasBottom" class="btn btn-sm" type="button">Join Group</button>}</>}
             </div>
             <div className='whole'>
-            {breaking_point_desktop ? <nav style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'row'}} class="nav">
-            <div style={{display: 'flex', flexDirection: 'row'}}>
-            <a style={{color: 'black'}}class="nav-link active" aria-current="page" href="#">All Posts(32)</a>
+            {breaking_point_desktop ? (
+    // Desktop navigation
+    <nav style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'row'}} class="nav">
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            <a style={{color: 'black'}} class="nav-link active" aria-current="page" href="#">All Posts(32)</a>
             <a style={{color: '#8A8A8A'}} class="nav-link" href="#">Article</a>
             <a style={{color: '#8A8A8A'}} class="nav-link" href="#">Event</a>
             <a style={{color: '#8A8A8A'}} class="nav-link" href="#">Education</a>
             <a style={{color: '#8A8A8A'}} class="nav-link" href="#">Job</a>
-            </div><div style={{display: 'flex', flexDirection: 'row'}}>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
             <div style={{marginRight: '3%', width: '133px'}} class="btn-group">
                 <button class="btn btn-sm" style={{backgroundColor: '#EDEEF0'}} type="button">
                     Write a Post
                 </button>
-                <button type="button" style={{borderColor: '#EDEEF0', backgroundColor: '#EDEEF0'}} class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split">
-                </button>
-                </div>
-                {user_signed_in ? 
+                <button type="button" style={{borderColor: '#EDEEF0', backgroundColor: '#EDEEF0'}} class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split"></button>
+            </div>
+            {user_signed_in ? (
                 <button onClick={() => setUser_signed_in(false)} style={{width: '134px', color: '#6A6A6B', borderColor: '#6A6A6B'}} class="btn btn-sm" type="button">
                     <span><img style={{marginTop: '-2px'}} alt='->' src={leaveicon} /></span> &nbsp; Leave Group
-                </button>: 
+                </button>
+            ) : (
                 <button style={{width: '134px'}} data-bs-toggle="modal" data-bs-target="#createaccountmodal" class="btn btn-sm btn-primary" type="button">
                     <span><img alt='+' src={groupicon} /></span> &nbsp; Join Group
-                </button>}</div>
-            </nav> : <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <p style={{fontWeight: '600', marginLeft: '3.75%'}}>Posts(368)</p>
-                    <button style={{marginBottom: '10px', marginTop: '-10px', marginRight: '3.75%', backgroundColor: '#F1F3F5', color: 'black'}} class="btn dropdown-toggle" type="button">
-                        Filter: All
-                    </button>
-            </div>}
-            </div>
-            {breaking_point_desktop && <hr className='dividerhr'/>}
-            <div className='wholeleft'>
-            <div style={{width: (breaking_point_desktop ? '50%' : '100%'), overflowY: 'scroll', height: (breaking_point_desktop ? '83vh' : '94vh')}}>
-            <div class="card" style={{width: '100%', boxShadow: (breaking_point_desktop ? '' : '0px 1px 2px rgba(0, 0, 0, 0.12)'), border: (breaking_point_desktop ? '' : 'none')}}>
+                </button>
+            )}
+        </div>
+    </nav>
+) : (
+    // Mobile navigation
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <p style={{fontWeight: '600', marginLeft: '3.75%'}}>Posts(368)</p>
+        <button style={{marginBottom: '10px', marginTop: '-10px', marginRight: '3.75%', backgroundColor: '#F1F3F5', color: 'black'}} class="btn dropdown-toggle" type="button">
+            Filter: All
+        </button>
+    </div>
+)}
+</div>
+            
+ {breaking_point_desktop && <hr className='dividerhr'/>}
+<div className='wholeleft'>
+    <div style={{width: (breaking_point_desktop ? '50%' : '100%'), overflowY: 'scroll', height: (breaking_point_desktop ? '83vh' : '94vh')}}>
+        {/* First card */}
+        <div class="card" style={{width: '100%', boxShadow: (breaking_point_desktop ? '' : '0px 1px 2px rgba(0, 0, 0, 0.12)'), border: (breaking_point_desktop ? '' : 'none')}}>
             <img src={rec1} class="card-img-top" alt="First Pic" />
             <div class="card-body">
                 <h6 style={{fontWeight: '540'}} class="card-title">&#9997; Article</h6>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}><p style={{fontWeight: '700', width:'90%'}} class="card-text">What if famous brands had regular fonts? Meet RegulaBrands!</p>
-                <div class="btn-group">
-                <button style={{height: '25px', width: '25px'}} type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img style={{marginTop: '-16px', marginLeft: '-8px'}} alt='...' src={menuicon} />
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><button class="dropdown-item" type="button">Edit</button></li>
-                    <li><button class="dropdown-item" type="button">Report</button></li>
-                    <li><button class="dropdown-item" type="button">Option 3</button></li>
-                </ul>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <p style={{fontWeight: '700', width:'90%'}} class="card-text">What if famous brands had regular fonts? Meet RegulaBrands!</p>
+                    <div class="btn-group">
+                        <button style={{height: '25px', width: '25px'}} type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img style={{marginTop: '-16px', marginLeft: '-8px'}} alt='...' src={menuicon} />
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><button class="dropdown-item" type="button">Edit</button></li>
+                            <li><button class="dropdown-item" type="button">Report</button></li>
+                            <li><button class="dropdown-item" type="button">Option 3</button></li>
+                        </ul>
+                    </div>
                 </div>
-                </div> 
                 <h6 style={{marginBottom: '30px', color: '#5C5C5C', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>I’ve worked in UX for the better part of a decade. From now on, I plan to reidf bsgakksa shly akssdjj shadkj</h6>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                {breaking_point_desktop ? <>
-                <div style={{display: 'flex'}}>
-                    <img style={{width: '40px', height: '40px'}} src={u1} alt='user1' />&nbsp;&nbsp;<h6 style={{fontSize: '15px', fontWeight: '700', marginTop: '10px'}}>Sarthak Kamra</h6>
-                </div>
-                <div style={{display: 'flex'}}>
-                    <img alt='views' style={{width: '18px', height: '18px', marginTop: '10px'}} src="https://img.icons8.com/material-outlined/24/525252/visible--v1.png"/>&nbsp;<p style={{fontSize: '15px', color: '#525252', marginTop: '7.5px', marginBottom: '0px'}}>1.4k views</p> 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn" style={{backgroundColor: '#EDEEF0'}} type="button">
-                    <img alt='share' src={shareicon} />
-                    </button>
-                </div></> : <>
-                <div style={{display: 'flex'}}>
-                    <img style={{width: '40px', height: '40px'}} src={u1} alt='user1' />&nbsp;&nbsp;
-                    <div style={{display: 'flex', flexDirection: 'column'}}><h6 style={{fontSize: '15px', fontWeight: '700'}}>Sarthak Kamra</h6>
-                    <p style={{fontSize: '15px', color: '#525252', marginTop: '-8px', marginBottom: '0px'}}>1.4k views</p></div>
-                </div>
-                <div style={{display: 'flex'}}> 
-                    <button class="btn" style={{backgroundColor: '#EDEEF0'}} type="button">
-                    <img style={{marginTop: '-3px'}} alt='share' src={shareicon} />&nbsp; Share
-                    </button>
-                </div></>}
+                    {/* User info */}
                 </div>
             </div>
-            </div>
-            <br />
-            <div class="card" style={{width: '100%', boxShadow: (breaking_point_desktop ? '' : '0px 1px 2px rgba(0, 0, 0, 0.12)'), border: (breaking_point_desktop ? '' : 'none')}}>
-            <img src={rec2} class="card-img-top" alt="Sec Pic" />
+        </div>
+        {/* Second card */}
+        <div class="card" style={{width: '100%', boxShadow: (breaking_point_desktop ? '' : '0px 1px 2px rgba(0, 0, 0, 0.12)'), border: (breaking_point_desktop ? '' : 'none')}}>
+            <img src={rec2} class="card-img-top" alt="Second Pic" />
             <div class="card-body">
                 <h6 style={{fontWeight: '540'}} class="card-title">&#128300; Education</h6>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}><p style={{fontWeight: '700', width:'90%'}} class="card-text">Tax Benefits for Investment under National Pension Scheme launched by Government</p>
